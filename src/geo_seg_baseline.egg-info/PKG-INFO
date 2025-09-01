@@ -1,0 +1,5 @@
+Metadata-Version: 2.4
+Name: geo-seg-baseline
+Version: 0.1.0
+Summary: Tiny CPU baseline for geospatial segmentation
+Requires-Python: >=3.10

@@ -1,0 +1,15 @@
+torch
+torchvision
+numpy
+pandas
+scikit-image
+matplotlib
+mlflow
+hydra-core
+rich
+black
+ruff
+pytest
+pre-commit
+streamlit
+
