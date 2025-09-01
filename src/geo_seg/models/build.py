@@ -47,10 +47,35 @@ class TinyUNet(nn.Module):
         p2 = self.pool2(e2)
         b = self.bot(p2)
         u2 = self.up2(b)
-        d2 = self.dec2(torch.cat([u2, e2], dim=1))
+        e2_c, u2_c = self._crop_to_match(e2, u2)
+        d2 = self.dec2(torch.cat([u2_c, e2_c], dim=1))
         u1 = self.up1(d2)
-        d1 = self.dec1(torch.cat([u1, e1], dim=1))
+        e1_c, u1_c = self._crop_to_match(e1, u1)
+        d1 = self.dec1(torch.cat([u1_c, e1_c], dim=1))
         return self.head(d1)
+
+    @staticmethod
+    def _center_crop(t: torch.Tensor, target_hw: tuple[int, int]) -> torch.Tensor:
+        _, _, h, w = t.shape
+        th, tw = target_hw
+        if h == th and w == tw:
+            return t
+        top = max((h - th) // 2, 0)
+        left = max((w - tw) // 2, 0)
+        bottom = top + th
+        right = left + tw
+        return t[:, :, top:bottom, left:right]
+
+    def _crop_to_match(self, a: torch.Tensor, b: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
+        """Center-crop both tensors to the same spatial size (min of each).
+
+        This guards against off-by-one size mismatches during upsampling/skip concat.
+        """
+        h = min(a.shape[-2], b.shape[-2])
+        w = min(a.shape[-1], b.shape[-1])
+        a2 = self._center_crop(a, (h, w))
+        b2 = self._center_crop(b, (h, w))
+        return a2, b2
 
 
 class TinyDeepLab(nn.Module):
