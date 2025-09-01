@@ -13,6 +13,8 @@ Topics: geospatial, segmentation, pytorch, unet, deeplabv3
 - Train: `make run` (writes to `runs/debug1/`)
 - Eval: `make eval` (reads `runs/debug1/best.pt`, writes `eval.json`)
 - Demo: `make demo` (Streamlit UI)
+  - Controls: threshold (0.1–0.9), overlay toggle, binary mask view, download mask.
+  - Note: demo uses random weights unless you load a checkpoint; masks will look noisy on Day‑1.
 
 ## Data Contract
 - Folder layout (Day 2-ready):
