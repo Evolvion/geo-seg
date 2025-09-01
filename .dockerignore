@@ -9,8 +9,8 @@ __pycache__/
 .DS_Store
 dist/
 build/
-data/
-runs/
+/data/
+/runs/
 *.pt
 *.log
 *.csv
