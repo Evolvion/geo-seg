@@ -3,6 +3,7 @@
 ![CI](https://github.com/Evolvion2/geo-seg/actions/workflows/ci.yml/badge.svg)
 
 One-liner: Tiny, CPU-friendly baseline for geospatial semantic segmentation.
+Topics: geospatial, segmentation, pytorch, unet, deeplabv3
 
 ## Quickstart
 - Setup: `make setup` (installs requirements and editable package)
