@@ -18,6 +18,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements.txt
+            pyproject.toml
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -29,10 +33,12 @@ jobs:
         run: black --check src tests
       - name: Test
         run: pytest -q
-      - name: Build Docker image (smoke)
-        run: docker build -t geo-seg:local .
-      - name: Run container (smoke training)
-        run: |
-          mkdir -p _out
-          docker run --rm -v "$PWD/_out:/out" geo-seg:local
-          test -f _out/best.pt
+      - name: Upload run artifacts (if present)
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: runs-and-eval
+          path: |
+            runs/**/metrics.csv
+            runs/**/eval.json
+          if-no-files-found: ignore

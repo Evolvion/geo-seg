@@ -15,8 +15,21 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image (local)
+        run: docker build -t geo-seg:local .
+      - name: Run container (smoke training)
+        run: |
+          mkdir -p _out
+          docker run --rm -v "$PWD/_out:/out" geo-seg:local
+          test -f _out/best.pt
+
   build-and-push:
     runs-on: ubuntu-latest
+    needs: smoke
     steps:
       - uses: actions/checkout@v4
       - name: Log in to GHCR
