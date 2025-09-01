@@ -26,7 +26,7 @@ Topics: geospatial, segmentation, pytorch, unet, deeplabv3
 - Fields: `data.root, data.image_size, data.num_classes; train.batch_size, epochs, lr, num_workers; model.name; runtime.device, seed, out_dir`.
 
 ## Metrics
-- Primary: binary IoU (0/0 → 1.0 by convention).
+- Primary: binary IoU (0/0 → 1.0 by convention). Masks are single‑channel integer IDs; predictions are thresholded at 0.5.
 - Template:
 
   | run | epoch | train_loss | val_iou |

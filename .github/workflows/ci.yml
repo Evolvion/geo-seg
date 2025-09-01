@@ -33,6 +33,12 @@ jobs:
         run: black --check src tests
       - name: Test
         run: pytest -q
+      - name: Security (bandit, informational)
+        continue-on-error: true
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit
+          bandit -q -r src -x tests || true
       - name: Upload run artifacts (if present)
         uses: actions/upload-artifact@v4
         if: always()
