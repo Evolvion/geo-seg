@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "geo-seg-baseline"
+name = "geo-seg"
 version = "0.1.0"
 description = "Tiny CPU baseline for geospatial segmentation"
 requires-python = ">=3.10"
@@ -14,4 +14,3 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
-

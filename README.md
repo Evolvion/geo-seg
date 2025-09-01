@@ -1,7 +1,9 @@
-# geo-seg-baseline
+# geo-seg
+
+![CI](https://github.com/Evolvion2/geo-seg/actions/workflows/ci.yml/badge.svg)
 
 ## Problem
-- TBD: baseline for geospatial semantic segmentation on CPU with simple models.
+- Minimal, CPU-friendly baseline for geospatial semantic segmentation with simple models.
 
 ## Data Contract
 - Image/Mask folders (to be finalized Day 2):
@@ -21,9 +23,12 @@
 - Demo: `make demo`
 - Clean: `make clean`
 
+## Docker
+- Build: `docker build -t ghcr.io/<you>/geo-seg:latest .`
+- Run (smoke): `docker run --rm -v $(pwd)/out:/out ghcr.io/<you>/geo-seg:latest` (writes `/out/best.pt`).
+
 ## Metrics
 - Primary: binary IoU (0/0 -> 1.0 convention).
 
 ## License
 - TBD
-
