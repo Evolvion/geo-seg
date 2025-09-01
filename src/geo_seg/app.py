@@ -4,7 +4,11 @@ from PIL import Image
 import torch
 import streamlit as st
 
-from .models.build import create_model
+try:
+    # When run as a script via Streamlit, use absolute import
+    from geo_seg.models.build import create_model  # type: ignore
+except Exception:  # fallback when run as a module
+    from .models.build import create_model
 
 
 def load_image_to_tensor(img: Image.Image) -> torch.Tensor:

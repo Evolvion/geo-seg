@@ -18,7 +18,7 @@ eval:
 	python -m geo_seg.eval --ckpt runs/debug1/best.pt
 
 demo:
-	streamlit run src/geo_seg/app.py -- --ckpt runs/debug1/best.pt
+	PYTHONPATH=src streamlit run src/geo_seg/app.py -- --ckpt runs/debug1/best.pt
 
 clean:
 	rm -rf runs __pycache__ src/**/__pycache__ tests/**/__pycache__
