@@ -1,4 +1,4 @@
-# geo‑seg
+# geo-seg
 
 ![CI](https://github.com/Evolvion2/geo-seg/actions/workflows/ci.yml/badge.svg)
 

@@ -2,6 +2,7 @@ runs/
 data/
 .venv/
 __pycache__/
+.pytest_cache/
 *.pt
 .DS_Store
 *.egg-info/
