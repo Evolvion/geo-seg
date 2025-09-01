@@ -37,14 +37,14 @@ def main(argv: list[str] | None = None) -> None:
     uploaded = st.file_uploader("Upload PNG image", type=["png", "jpg", "jpeg"])
     if uploaded is not None:
         img = Image.open(uploaded)
-        st.image(img, caption="Input", use_column_width=True)
+        st.image(img, caption="Input", use_container_width=True)
         if st.button("Predict"):
             x = load_image_to_tensor(img)
             with torch.no_grad():
                 logits = model(x)
                 probs = torch.sigmoid(logits[:, 0])
                 mask = (probs >= 0.5).float().squeeze(0).numpy()
-            st.image(mask, caption="Mask", use_column_width=True, clamp=True)
+            st.image(mask, caption="Mask", use_container_width=True, clamp=True)
 
 
 if __name__ == "__main__":
