@@ -1,9 +1,21 @@
 ## Summary
-Short purpose.
+
+- Short description of the change.
 
 ## Checklist
-- [ ] Tests pass (`pytest -q`)
-- [ ] Lint/format pass (`ruff`, `black --check`)
-- [ ] README updated (commands/metrics)
-- [ ] No large files or data added
+
+- [ ] Ran `make lint format test`
+- [ ] Updated docs/README if needed
+- [ ] Included before/after metrics or screenshots (demo)
+
+## Testing
+
+- Commands executed:
+  - `make test`
+  - `make run` (optional)
+  - `make eval` (optional)
+
+## Related Issues
+
+- Closes #
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 import argparse
 import json
 from pathlib import Path
+from datetime import datetime, timezone
 import torch
 
 from .models.build import create_model
@@ -36,18 +37,27 @@ def evaluate(ckpt_path: str, out_dir: str | None = None) -> float:
 
     with torch.no_grad():
         ious = []
+        n_samples = 0
         for batch in loader:
             imgs = batch["image"]
             masks = batch["mask"]
             logits = model(imgs)
             iou = binary_iou(logits, masks)
             ious.append(iou)
+            n_samples += imgs.size(0)
     mean_iou = float(sum(ious) / max(1, len(ious)))
 
     out_path = Path(out_dir) if out_dir else Path(ckpt_path).parent
     (out_path).mkdir(parents=True, exist_ok=True)
     with open(out_path / "eval.json", "w") as f:
-        json.dump({"iou": mean_iou}, f)
+        json.dump(
+            {
+                "val_iou": mean_iou,
+                "num_samples": int(n_samples),
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            },
+            f,
+        )
 
     print(f"IoU: {mean_iou:.4f}")
     return mean_iou
