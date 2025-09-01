@@ -125,6 +125,9 @@ def main(argv: list[str] | None = None) -> None:
             st.error(f"Image too large: {img.size}. Please use max side ≤ {max_side}.")
             return
 
+        # Show the original input image
+        st.image(img, caption="Input (original)", use_container_width=True)
+
         # Preprocess: resize+pad to training size
         padded, info = resize_and_pad_to_square(img, int(default_cfg.data.image_size))
         x = to_model_tensor(padded).to(device)
