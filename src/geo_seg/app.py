@@ -1,6 +1,7 @@
 import argparse
 import io
 import time
+import subprocess
 import numpy as np
 from PIL import Image
 import torch
@@ -200,6 +201,16 @@ def main(argv: list[str] | None = None) -> None:
                 file_name=out_name,
                 mime="image/png",
             )
+
+    # Footer: commit short SHA if available
+    try:
+        sha = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True, check=True
+        ).stdout.strip()
+        if sha:
+            st.caption(f"Commit: {sha}")
+    except Exception:
+        pass
 
 
 if __name__ == "__main__":
