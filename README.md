@@ -31,4 +31,4 @@
 - Primary: binary IoU (0/0 -> 1.0 convention).
 
 ## License
-- TBD
+- Apache-2.0. See `LICENSE` for full text.
